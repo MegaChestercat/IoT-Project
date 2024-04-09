@@ -44,13 +44,6 @@
                     </v-btn>
                     
                 </v-col>
-
-                <v-col>
-                    <v-btn to="/teachers" rounded="lg" prepend-icon='mdi-calendar-range' size="large"height="150" width="70%" class="mt-5 ml-7 px-16" stacked>
-                        <v-text class="text-center">Profesores</v-text>
-                    </v-btn>
-                    
-                </v-col>
             </v-row>
     
         </v-container>

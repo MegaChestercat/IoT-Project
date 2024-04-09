@@ -8,19 +8,19 @@
                 </NuxtLink>
                 <v-list lines='two'>
                     <NuxtLink to="/" class="hoverbtn"style="text-decoration: none;">
-                        <v-list-item style="color: gray;" class="ml-2 my-8 hoverbtn" prepend-icon="mdi-view-dashboard" title="Dashboard"></v-list-item>
+                        <v-list-item style="color: gray;" class="ml-2 my-8 hoverbtn" prepend-icon="mdi-view-dashboard" title="Panel"></v-list-item>
                     </NuxtLink>
 
                     <NuxtLink to="/profile" style="text-decoration: none;">
-                        <v-list-item style="color: gray;" class="ml-2 my-8" prepend-icon="mdi-account-circle" title="Profile"></v-list-item>
+                        <v-list-item style="color: gray;" class="ml-2 my-8" prepend-icon="mdi-account-circle" title="Perfil"></v-list-item>
                     </NuxtLink>
 
                     <NuxtLink to="/settings" style="text-decoration: none;">
-                        <v-list-item style="color: gray;" class="ml-2 my-8" prepend-icon="mdi-tune" title="Settings"></v-list-item>
+                        <v-list-item style="color: gray;" class="ml-2 my-8" prepend-icon="mdi-tune" title="Ajustes"></v-list-item>
                     </NuxtLink>
 
                     <NuxtLink to="/analytics" style="text-decoration: none;">
-                        <v-list-item style="color: gray;" class="ml-2 my-8" prepend-icon="mdi-chart-bar" title="Analytics"></v-list-item>
+                        <v-list-item style="color: gray;" class="ml-2 my-8" prepend-icon="mdi-chart-bar" title="Analítica"></v-list-item>
                     </NuxtLink>
                 </v-list>
                 
