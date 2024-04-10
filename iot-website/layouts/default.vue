@@ -28,7 +28,7 @@
                     LogIn
                 </v-btn>
             </v-navigation-drawer>
-            <v-main class="d-flex align-center" style="height: 100vh;">
+            <v-main  class="d-flex justify-center align-center" style="height: 100vh;">
                 <slot />
             </v-main>
         </v-layout>
