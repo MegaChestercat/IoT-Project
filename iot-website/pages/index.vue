@@ -24,7 +24,7 @@
                     
                 </v-col>
                 <v-col>
-                    <v-btn to="/login" rounded="lg" prepend-icon='mdi-book' size="large" height="150" width="70%" class="mt-5 ml-7 px-16" stacked>
+                    <v-btn to="/prestamo_material" rounded="lg" prepend-icon='mdi-book' size="large" height="150" width="70%" class="mt-5 ml-7 px-16" stacked>
                         <v-text class="text-center">Historial Préstamo <br>de Material</v-text>
                             
                     </v-btn>

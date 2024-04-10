@@ -5,11 +5,14 @@
       </v-app-bar>
   
       <v-main>
-        <div class="search-form">
+        <div class="consultation-form">
           <v-container>
             <v-row>
               <v-col cols="12" sm="6" md="3">
                 <v-text-field v-model="id" label="ID"></v-text-field>
+              </v-col>
+              <v-col cols="12" sm="6" md="3">
+                <v-text-field v-model="name" label="Nombre"></v-text-field>
               </v-col>
               <v-col cols="12" sm="6" md="3">
                 <v-menu v-model="menu1" :close-on-content-click="false" transition="scale-transition" offset-y>
@@ -44,7 +47,7 @@
   
         <div class="search-results">
           <v-container>
-            <h3>Resultados de Búsqueda:</h3>
+            <h3>Resultados Obtenidos:</h3>
             <v-data-table :headers="headers" :items="searchResults"></v-data-table>
           </v-container>
         </div>
@@ -56,8 +59,9 @@
   export default {
     data() {
       return {
-        title: 'Gym',
+        title: 'Consultar Préstamo de Material',
         id: '',
+        name: '',
         startDate: null,
         endDate: null,
         menu1: false,
@@ -70,8 +74,7 @@
         // Implement your search functionality here
         // For now, let's just simulate some search results
         this.searchResults = [
-          { id: '123', date: '2024-04-09' },
-          { id: '456', date: '2024-04-08' },
+          { date: '2024-04-09', id: '43765', name: 'Juan Hernández Artiano', material: 'Material' },
           // Add more search results if needed
         ];
       }
@@ -79,16 +82,18 @@
     computed: {
       headers() {
         return [
-          { text: 'ID', value: 'id' },
           { text: 'Fecha', value: 'date' },
+          { text: 'ID', value: 'id' },
+          { text: 'Nombre', value: 'name' },
+          { text: 'Material', value: 'material' },
         ];
       }
     }
   };
   </script>
   
-  <style>
-  .search-form {
+  <style scoped>
+  .consultation-form {
     margin-bottom: 20px;
   }
   </style>
