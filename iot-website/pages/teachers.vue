@@ -1,46 +1,53 @@
 <template>
+  <!-- Contenedor principal -->
   <v-container>
+    <!-- Fila principal -->
     <v-row>
+      <!-- Columna que ocupa todo el ancho en dispositivos pequeños y 8/12 en medianos -->
       <v-col cols="12" md="8">
+        <!-- Tarjeta principal -->
         <v-card>
+          <!-- Barra de herramientas con título -->
           <v-toolbar color="deep-orange accent-4" dark>
             <v-toolbar-title>Horario de profesor</v-toolbar-title>
           </v-toolbar>
+
+          <!-- Contenido de la tarjeta con el formulario -->
           <v-card-text>
             <v-form>
               <v-container>
                 <v-row>
+                  <!-- Campo de texto para el ID del profesor -->
                   <v-col cols="12" sm="6" md="3">
-                    <!-- Adjusted size using dense property for text-field -->
                     <v-text-field label="ID" required dense></v-text-field>
                   </v-col>
+                  <!-- Campo de texto para el nombre del profesor -->
                   <v-col cols="12" sm="6" md="3">
-                    <!-- Adjusted size using dense property for text-field -->
                     <v-text-field label="Nombre" required dense></v-text-field>
                   </v-col>
+                  <!-- Botón para buscar -->
                   <v-col cols="12" sm="6" md="3">
-                    <!-- Adjusted size using dense property for button -->
                     <v-btn color="white" class="deep-purple--text text--accent-4" dense>Buscar</v-btn>
                   </v-col>
                 </v-row>
               </v-container>
             </v-form>
           </v-card-text>
-          <!-- Paginated table starts here -->
+
+          <!-- Contenido de la tarjeta con la tabla paginada -->
           <v-card-text>
-            <v-card-text>
-      <v-data-table
-        :title="headers"
-        :items="classes"
-        :items-per-page="5"
-        :page.sync="page"
-        class="elevation-1"
-      ></v-data-table>
-      <v-pagination
-        v-model="page"
-        :length="pageCount"
-      ></v-pagination>
-    </v-card-text>
+            <v-data-table
+              :headers="headers" <!-- Encabezados de la tabla -->
+              :items="classes" <!-- Datos de las clases -->
+              :items-per-page="5" <!-- Elementos por página -->
+              :page.sync="page" <!-- Página actual -->
+              class="elevation-1"
+            ></v-data-table>
+            <!-- Paginación -->
+            <v-pagination
+              v-model="page"
+              :length="pageCount" <!-- Cantidad total de páginas -->
+            ></v-pagination>
           </v-card-text>
         </v-card>
       </v-col>
@@ -50,45 +57,41 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-      page: 1,
-      headers: [
+      page: 1, // Página actual
+      headers: [ // Encabezados de la tabla
         { text: 'Curso', align: 'start', value: 'course' },
         { text: 'Hora de inicio', value: 'start' },
         { text: 'Hora de fin', value: 'end' },
-        // Add more headers if needed
+        // Añadir más encabezados si es necesario
       ],
-      classes: [
+      classes: [ // Datos de las clases
         { course: 'Math 101', start: '9:00 AM', end: '10:30 AM' },
         { course: 'History 202', start: '11:00 AM', end: '12:30 PM' },
         { course: 'Physics 303', start: '2:00 PM', end: '3:30 PM' },
-        // Add more classes to simulate more data
+        // Añadir más clases para simular más datos
       ],
-      pageCount: 3 // Adjust accordingly
+      pageCount: 3 // Cantidad total de páginas
     }
   }
 }
 </script>
 
 <style scoped>
-  /* Adjust button and text field sizes */
+  /* Ajustar el tamaño de los botones y campos de texto */
   .v-text-field__slot {
-    height: 52px; /* Example height, adjust as needed */
+    height: 52px; /* Altura de ejemplo, ajustar según sea necesario */
   }
 
-  .div-vcard-text{
-    padding: 10px !important;
-  }
-  
-  /* Adjust font sizes */
+  /* Ajustar los tamaños de fuente */
   .v-btn .v-btn__content,
   .v-text-field label {
-    font-size: 14px; /* Example font size, adjust as needed */
+    font-size: 14px; /* Tamaño de fuente de ejemplo, ajustar según sea necesario */
   }
 
-  /* Ensure the button matches the text fields in size */
+  /* Asegurarse de que el botón coincida en tamaño con los campos de texto */
   .v-btn {
-    min-height: 52px; /* Adjust this value to match your text fields */
+    min-height: 52px; /* Ajustar este valor para que coincida con tus campos de texto */
   }
 </style>
