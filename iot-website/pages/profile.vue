@@ -1,9 +1,9 @@
 <template>
     <div>
         <div >
-            <v-card>
+            <v-sheet>
                 <v-avatar color="red" size="100"></v-avatar>
-            </v-card>
+            </v-sheet>
         </div>
     </div>
 </template>
