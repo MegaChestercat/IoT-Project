@@ -1,16 +1,16 @@
-import model from "~~/server/models/user"
+import UserModel from "~~/server/models/user"
 
-export default defineEventHandler(async (event) =>{
-    const body = await readBody(event)
-    console.log('Received form data:', body); // Inspect the object
+export default defineEventHandler(async (event) => {
+    const body = await readBody(event);
 
-    try{
-        const result = await model.find().exec()
-        return { message: result };
-    }
-    catch(err){
+    try {
+        const newUser = new UserModel(body);
+        const result = await newUser.save();
+        return { message: "User created successfully", user: result };
+    } catch (err) {
         throw createError({
+            statusCode: 500,
             message: err.message
-        })
+        });
     }
-})
+});
