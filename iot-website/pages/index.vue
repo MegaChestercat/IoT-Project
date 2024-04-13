@@ -4,7 +4,7 @@
             <v-container>
                 <v-row>
                     <v-col>
-                        <v-btn to="/login" rounded="lg" prepend-icon="mdi-clock-outline" size="large" height="150" width="70%"  class="mt-5 ml-7 px-16" stacked>
+                        <v-btn to="/entrance_access" rounded="lg" prepend-icon="mdi-clock-outline" size="large" height="150" width="70%"  class="mt-5 ml-7 px-16" stacked>
                             <p class="text-center">Accesos Entrada</p>
                         </v-btn>
                         
