@@ -1,12 +1,11 @@
 <template>
-    <v-app>
-      <v-app-bar app color="black" dark>
-        <v-toolbar-title>{{ title }}</v-toolbar-title>
-      </v-app-bar>
-  
-      <v-main>
-        <div class="reservation-form">
-          <v-container>
+    <div>
+      <v-sheet width="100%" height="10%" class="header-bg ml-5 mt-5">
+        <p class="text-h4">Reservación de Salones</p>
+      </v-sheet>
+      <v-sheet class="reservation-form">
+      <form @prevent.submit="submit">
+        <v-container>
             <v-row>
               <v-col cols="12" sm="6" md="3">
                 <v-text-field v-model="id" label="ID"></v-text-field>
@@ -46,16 +45,16 @@
               </v-col>
             </v-row>
           </v-container>
-        </div>
-  
-        <div class="search-results">
-          <v-container>
+      </form>
+      <v-sheet class="search-results">
+        <v-container>
             <h3>Resultados de Búsqueda:</h3>
             <v-data-table :headers="headers" :items="searchResults"></v-data-table>
-          </v-container>
-        </div>
-      </v-main>
-    </v-app>
+        </v-container>
+      </v-sheet>
+    </v-sheet>
+    </div>
+   
   </template>
   
   <script>
@@ -102,6 +101,10 @@
   <style scoped>
   .reservation-form {
     margin-bottom: 20px;
+  }
+
+  .header-bg{
+    color: black;
   }
   </style>
   

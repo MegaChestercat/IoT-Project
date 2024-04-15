@@ -2,6 +2,7 @@ import {resolve} from "path"
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 import { defineNuxtConfig } from 'nuxt/config'
 
+
 export default defineNuxtConfig({
   //...
   devtools: { enabled: false },
@@ -28,6 +29,11 @@ export default defineNuxtConfig({
     //...
     '@vee-validate/nuxt',
   ],
+  nitro: {
+    plugins: [
+      '~/server/plugins/dbConnection.js' // Asegúrate de que la ruta es correcta y usa .ts si es un archivo TypeScript
+    ]
+  },
   vite: {
     vue: {
       template: {
