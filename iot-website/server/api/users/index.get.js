@@ -5,8 +5,8 @@ export default defineEventHandler(async (event) =>{
     console.log('Received form data:', body); // Inspect the object
 
     try{
-        new model(body).save()
-        return { message: 'Author created' };
+        const result = await model.find().exec()
+        return { message: result };
     }
     catch(err){
         throw createError({
