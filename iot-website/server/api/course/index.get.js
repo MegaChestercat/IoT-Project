@@ -1,10 +1,10 @@
 // users/index.get.js
-import UserModel from "~~/server/models/user"
+import CourseModel from "~~/server/models/course"
 
 export default defineEventHandler(async (event) => {
     try {
-        const users = await UserModel.find();
-        return users;
+        const courses = await CourseModel.find();
+        return courses;
     } catch (err) {
         throw createError({
             statusCode: 500,
