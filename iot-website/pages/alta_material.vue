@@ -4,7 +4,7 @@
     <v-form ref="form" v-model="valid" @submit.prevent="submitMaterial">
       <!-- Campo de texto para el nombre del material con reglas de validación -->
       <v-text-field
-        v-model="material.name"
+        v-model="material.nombre"
         label="Nombre"
         :rules="nameRules"
         required
@@ -12,7 +12,7 @@
 
       <!-- Campo de texto para el número de pieza del material con reglas de validación -->
       <v-text-field
-        v-model="material.partNumber"
+        v-model="material.numeroPieza"
         label="Número de pieza"
         :rules="partNumberRules"
         required
@@ -20,7 +20,7 @@
 
       <!-- Campo de texto para la marca del material con reglas de validación -->
       <v-text-field
-        v-model="material.brand"
+        v-model="material.marca"
         label="Marca"
         :rules="brandRules"
         required
@@ -28,7 +28,7 @@
 
       <!-- Campo de texto para el tipo de material con reglas de validación -->
       <v-text-field
-        v-model="material.type"
+        v-model="material.tipo"
         label="Tipo"
         :rules="typeRules"
         required
@@ -36,7 +36,7 @@
 
       <!-- Campo de texto para especificar a qué laboratorio pertenece el material con reglas de validación -->
       <v-text-field
-        v-model="material.lab"
+        v-model="material.laboratorio"
         label="Laboratorio al que pertenece"
         :rules="labRules"
         required
@@ -47,43 +47,63 @@
     </v-form>
   </v-container>
 </template>
-
 <script>
 export default {
   name: 'MaterialRegistration',
   data() {
     return {
-      valid: true, // Indica si el formulario es válido
-      material: { // Modelo de datos para el formulario, almacena los valores de los campos
-        name: '',
-        partNumber: '',
-        brand: '',
-        type: '',
-        lab: ''
+      valid: true, // Indicates if the form is valid
+      material: { // Data model for the form
+        nombre: '',
+        numeroPieza: '',
+        marca: '',
+        tipo: '',
+        laboratorio: ''
       },
-      nameRules: [ // Reglas de validación para el nombre del material
+      // Validation rules
+      nameRules: [
         v => !!v || 'El nombre es requerido'
       ],
-      partNumberRules: [ // Reglas de validación para el número de pieza
+      partNumberRules: [
         v => !!v || 'El número de pieza es requerido'
       ],
-      brandRules: [ // Reglas de validación para la marca
+      brandRules: [
         v => !!v || 'La marca es requerida'
       ],
-      typeRules: [ // Reglas de validación para el tipo de material
+      typeRules: [
         v => !!v || 'El tipo es requerido'
       ],
-      labRules: [ // Reglas de validación para especificar el laboratorio
+      labRules: [
         v => !!v || 'El laboratorio es requerido'
       ]
     }
   },
   methods: {
-    submitMaterial() {
-      if (this.$refs.form.validate()) { // Verifica la validez del formulario
-        // Lugar para manejar la lógica de envío, como enviar datos a un servidor
-        console.log('Material registrado:', this.material); // Muestra por consola el material registrado
-        this.$refs.form.reset(); // Reinicia el formulario
+    async submitMaterial() {
+      if (this.$refs.form.validate()) { // Validates the form
+        try {
+          // Sending the data to the server
+          const response = await fetch('/api/material', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(this.material)
+          });
+
+          if (!response.ok) {
+            throw new Error('Failed to register material');
+          }
+
+          const result = await response.json();
+          console.log('Material registered:', result); // Log the server response
+
+          this.$refs.form.reset(); // Resets the form after successful registration
+          alert('Material registered successfully!'); // Show success message
+        } catch (error) {
+          console.error('Error registering material:', error);
+          alert('Failed to register material.'); // Show error message
+        }
       }
     }
   }

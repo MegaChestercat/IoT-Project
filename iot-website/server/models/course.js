@@ -6,7 +6,7 @@ const courseSchema = new mongoose.Schema({
     alumno: String,
     claveCurso: String,
     nombreCurso: String,
-    grupo: Int8Array,
+    //grupo: Int8Array,
     profesor: String,
 })
 
