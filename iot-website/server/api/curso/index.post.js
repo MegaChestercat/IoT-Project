@@ -1,12 +1,12 @@
-import CourseModel from "~~/server/models/course"
+import CursoModel from "~~/server/models/curso"
 
 export default defineEventHandler(async (event) => {
     const body = await readBody(event);
 
     try {
-        const newCourse = new CourseModel(body);
+        const newCurso = new CursoModel(body);
         const result = await newCourse.save();
-        return { message: "Course created successfully", course: result };
+        return { message: "Course created successfully", curso: result };
     } catch (err) {
         throw createError({
             statusCode: 500,

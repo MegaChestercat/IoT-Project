@@ -1,12 +1,12 @@
 // server/api/users/[id].delete.js
 
-import CourseModel from "~~/server/models/course"
+import CursoModel from "~~/server/models/curso"
 
 export default defineEventHandler(async (event) => {
     const { id } = event.context.params;
 
     try {
-        const course = await CourseModel.findByIdAndDelete(id);
+        const curso = await CursoModel.findByIdAndDelete(id);
         if (!course) {
             throw createError({ statusCode: 404, message: "Course not found" });
         }
