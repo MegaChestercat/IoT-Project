@@ -61,7 +61,7 @@
                 <v-btn to="/alta_material" rounded="lg" size="large" class="d-block mx-16 mb-5 px-4 py-3 text-none">
                     <p>Crear Material</p>
                 </v-btn>
-                <v-btn to="/alta_curso"  rounded="lg" size="large" class="d-block mx-16 mb-5 px-4 py-3 text-none">
+                <v-btn to="/create-course"  rounded="lg" size="large" class="d-block mx-16 mb-5 px-4 py-3 text-none">
                     <p>Crear Curso</p>
                 </v-btn>
             </v-card>

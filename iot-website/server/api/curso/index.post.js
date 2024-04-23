@@ -5,7 +5,7 @@ export default defineEventHandler(async (event) => {
 
     try {
         const newCurso = new CursoModel(body);
-        const result = await newCourse.save();
+        const result = await newCurso.save();
         return { message: "Course created successfully", curso: result };
     } catch (err) {
         throw createError({

@@ -6,10 +6,10 @@ const cursoSchema = new mongoose.Schema({
     alumno: String,
     claveCurso: String,
     nombreCurso: String,
-    grupo: Int8Array,
+    //grupo: Int8Array,
     profesor: String,
 })
 
-const model = mongoose.model("curso", cursoSchema);
+const model = mongoose.model("cursos", cursoSchema);
 
 export default model;
