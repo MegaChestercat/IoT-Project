@@ -31,7 +31,8 @@ export default defineNuxtConfig({
   ],
   nitro: {
     plugins: [
-      '~/server/plugins/dbConnection.js' // Asegúrate de que la ruta es correcta y usa .ts si es un archivo TypeScript
+      '~/server/plugins/dbConnection.js'
+      // Asegúrate de que la ruta es correcta y usa .ts si es un archivo TypeScript
     ]
   },
   vite: {
