@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard">
-    <!-- Cards go here, if you have them -->
+    <!-- Filas con dos gráficas cada una-->
     <div class="graph-row">
       <GraficaAsistencia />
       <GraficaAccesos />
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+//Importamos los componentes
 import GraficaAsistencia from '~/pages/grafica_asistencia.vue'
 import GraficaAccesos from '~/pages/grafica_accesos.vue'
 import GraficaCursos from '~/pages/grafica_cursos.vue'
@@ -28,24 +29,26 @@ export default {
 }
 </script>
 
+
 <style>
+/*Definimos los estilos*/
 .dashboard {
-  max-width: 1200px; /* Adjust as needed for your layout */
+  max-width: 1200px; /* layout */
   margin: 50px;
 }
 
 .graph-row {
   display: flex;
   justify-content: space-between;
-  gap: 1rem; /* Adjust the spacing between graphs as needed */
+  gap: 1rem; /*Espacio entre gráficas*/
 }
 
 .graph-row > * {
-  flex-basis: calc(50% - 0.5rem); /* Adjust the spacing based on 'gap' value */
-  height: auto; /* Or set a fixed height if you prefer */
+  flex-basis: calc(50% - 0.5rem); /* Ajusta el espacio entre gap*/
+  height: auto;
 }
 
-/* Styles for individual graphs, if necessary, to ensure they fill their containers */
+/* e*/
 .grafica-asistencia, .grafica-accesos, .grafica-cursos, .grafica-material {
   width: 200px;
   height: 200px !important;

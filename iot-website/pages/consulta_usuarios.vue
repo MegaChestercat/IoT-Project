@@ -58,11 +58,11 @@
   
   // Define los encabezados de la tabla, incluyendo la columna de acción
   const headers = ref([
-    { text: 'Nombre', value: 'nombre' },
-    { text: 'ID', value: 'id' },
-    { text: 'Rol', value: 'rol' },
-    { text: 'Carrera', value: 'carrera' },
-    { text: 'Acciones', value: 'action', sortable: false },
+    { title: 'Nombre', value: 'nombre' },
+    { title: 'ID', value: 'id' },
+    { title: 'Rol', value: 'rol' },
+    { title: 'Carrera', value: 'carrera' },
+    { title: 'Acciones', value: 'action', sortable: false },
   ]);
   
   // Realiza la petición para obtener los usuarios

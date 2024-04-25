@@ -60,13 +60,13 @@ export default {
       dialog: false,
       editingCourse: {},
       headers: [
-        { text: 'Fecha', value: 'fecha' },
-        { text: 'ID', value: 'id' },
-        { text: 'Alumno', value: 'alumno' },
-        { text: 'Clave del Curso', value: 'claveCurso' },
-        { text: 'Nombre del Curso', value: 'nombreCurso' },
-        { text: 'Profesor', value: 'profesor' },
-        { text: 'Acciones', value: 'action', sortable: false }
+        { title: 'Fecha', value: 'fecha' },
+        { title: 'ID', value: 'id' },
+        { title: 'Alumno', value: 'alumno' },
+        { title: 'Clave del Curso', value: 'claveCurso' },
+        { title: 'Nombre del Curso', value: 'nombreCurso' },
+        { title: 'Profesor', value: 'profesor' },
+        { title: 'Acciones', value: 'action', sortable: false }
       ],
       courses: []
     };
@@ -143,7 +143,15 @@ export default {
     closeDialog() {
       this.dialog = false;
       this.editingCourse = {};
-    }
+    },
+    notifyUser(message, color) {
+        this.$q.notify({
+          color: color,
+          position: 'top',
+          message: message,
+          timeout: 3000
+        });
+      }
   }
 };
 </script>
