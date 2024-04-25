@@ -1,79 +1,53 @@
 <template>
-    <div>
-      <canvas ref="canvas"></canvas>
+  <div class="dashboard">
+    <!-- Cards go here, if you have them -->
+    <div class="graph-row">
+      <GraficaAsistencia />
+      <GraficaAccesos />
     </div>
-  </template>
-  
-  <script setup>
-  import { ref, onMounted, watchEffect } from 'vue';
-  import Chart from 'chart.js/auto';
-  
-  const chartData = ref({
-    labels: [
-      'January', 'February', 'March', 'April', 'May', 'June',
-      'July', 'August', 'September', 'October', 'November', 'December'
-    ],
-    datasets: [{
-      label: 'Asistencia',
-      backgroundColor: '#f87979',
-      data: []
-    }]
-  });
-  
-  const chartOptions = {
-    responsive: true,
-    maintainAspectRatio: false
-  };
-  
-  const canvas = ref(null);
-  let myChart = null;
-  
-  // Define a function to fetch attendance data
-  async function fetchAttendanceData(year) {
-    try {
-      const response = await fetch(`/api/asistencia?year=${year}`
-      );
+    <div class="graph-row">
+      <GraficaCursos />
+      <GraficaMaterial />
+    </div>
+  </div>
+</template>
 
-      console.log(response)
-      if (!response.ok) {
-        throw new Error('Network response was not ok.');
-      }
-      return await response.json();
-    } catch (error) {
-      console.error('Failed to fetch attendance data:', error);
-    }
+<script>
+import GraficaAsistencia from '~/pages/grafica_asistencia.vue'
+import GraficaAccesos from '~/pages/grafica_accesos.vue'
+import GraficaCursos from '~/pages/grafica_cursos.vue'
+import GraficaMaterial from '~/pages/grafica_material.vue'
+
+export default {
+  components: {
+    GraficaAsistencia,
+    GraficaAccesos,
+    GraficaCursos,
+    GraficaMaterial
   }
-  
-  // Use onMounted lifecycle hook to fetch data and draw the chart
-  onMounted(async () => {
-    const year = new Date().getFullYear();
-    const attendanceData = await fetchAttendanceData(year);
-  
-    if (attendanceData) {
-      const monthlyAttendance = new Array(12).fill(0);
-      attendanceData.forEach(record => {
-        monthlyAttendance[record._id - 1] = record.count;
-      });
-  
-      chartData.value.datasets[0].data = monthlyAttendance;
-    }
-  
-    // Initialize the chart
-    if (canvas.value && !myChart) {
-      myChart = new Chart(canvas.value.getContext('2d'), {
-        type: 'bar',
-        data: chartData.value,
-        options: chartOptions
-      });
-    }
-  });
-  
-  // Watch for updates to chartData and update the chart
-  watchEffect(() => {
-    if (myChart) {
-      myChart.data = chartData.value;
-      myChart.update();
-    }
-  });
-  </script>
-  
+}
+</script>
+
+<style>
+.dashboard {
+  max-width: 1200px; /* Adjust as needed for your layout */
+  margin: 50px;
+}
+
+.graph-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem; /* Adjust the spacing between graphs as needed */
+}
+
+.graph-row > * {
+  flex-basis: calc(50% - 0.5rem); /* Adjust the spacing based on 'gap' value */
+  height: auto; /* Or set a fixed height if you prefer */
+}
+
+/* Styles for individual graphs, if necessary, to ensure they fill their containers */
+.grafica-asistencia, .grafica-accesos, .grafica-cursos, .grafica-material {
+  width: 200px;
+  height: 200px !important;
+}
+</style>
