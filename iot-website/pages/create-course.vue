@@ -1,30 +1,7 @@
 <template>
+  <p class="text-center text-h3 font-weight-bold my-5">Crear Curso</p>
   <v-container>
     <v-form ref="form" v-model="valid" @submit.prevent="submitForm">
-      <v-text-field
-        v-model="course.fecha"
-        label="Fecha"
-        type="date"
-        :rules="dateRules"
-        required
-      ></v-text-field>
-
-      <v-text-field
-        v-model="course.id"
-        label="ID"
-        type="text"
-        :rules="idRules"
-        required
-      ></v-text-field>
-
-      <v-text-field
-        v-model="course.alumno"
-        label="Alumno"
-        type="text"
-        :rules="alumnoRules"
-        required
-      ></v-text-field>
-
       <v-text-field
         v-model="course.claveCurso"
         label="Clave del Curso"
@@ -42,6 +19,14 @@
       ></v-text-field>
 
       <v-text-field
+        v-model="course.seccion"
+        label="Sección"
+        type="number"
+        :rules="seccionRules"
+        required
+      ></v-text-field>
+
+      <v-text-field
         v-model="course.profesor"
         label="Profesor"
         type="text"
@@ -49,41 +34,34 @@
         required
       ></v-text-field>
 
-      <v-btn :disabled="!valid" color="success" @click="submitForm">Registrar</v-btn>
-
-      <v-btn color="error" @click="cancel">Cancelar</v-btn>
+      <div>
+        <v-btn :disabled="!valid" color="success" @click="submitForm" class="mr-5">Registrar</v-btn>
+        <v-btn color="error" @click="cancel">Cancelar</v-btn>
+      </div>
     </v-form>
   </v-container>
 </template>
 
 <script>
+import Swal from 'sweetalert2'
 export default {
   data() {
     return {
       valid: true,
       course: {
-        fecha: null,
-        id: '',
-        alumno: '',
         claveCurso: '',
         nombreCurso: '',
+        seccion: '',
         profesor: ''
       },
-      dateRules: [
-        v => !!v || 'La fecha es requerida'
-      ],
-      idRules: [
-        v => !!v || 'El ID es requerido',
-        v => !isNaN(parseFloat(v)) && isFinite(v) || 'El ID debe ser numérico'
-      ],
-      alumnoRules: [
-        v => !!v || 'El nombre del alumno es requerido'
-      ],
       claveCursoRules: [
         v => !!v || 'La clave del curso es requerida'
       ],
       nombreCursoRules: [
         v => !!v || 'El nombre del curso es requerido'
+      ],
+      seccionRules: [
+        v => !!v || 'La sección del curso es requerida'
       ],
       profesorRules: [
         v => !!v || 'El nombre del profesor es requerido'
@@ -110,7 +88,7 @@ export default {
           console.log('Course registered:', result);
 
           this.$refs.form.reset();
-          this.$router.push('/consulta_cursos');
+          this.$router.push('/consulta_cursos'); //This action will sent the user automatically to the page insde the parethesis, once the form was sent.
           this.$q.notify({
             color: 'positive',
             position: 'top',

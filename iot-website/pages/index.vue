@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="d-flex fill-height align-center">
         <div class="d-inline-flex ml-16 mr-16">
             <v-container>
                 <v-row>
@@ -25,7 +25,7 @@
                         
                     </v-col>
                     <v-col>
-                        <v-btn to="/login" rounded="lg" prepend-icon='mdi-book' size="large" height="150" width="70%" class="mt-5 ml-7 px-16" stacked>
+                        <v-btn to="/prestamo_material" rounded="lg" prepend-icon='mdi-book' size="large" height="150" width="70%" class="mt-5 ml-7 px-16" stacked>
                             <p class="text-center">Historial Préstamo <br>de Material</p>
                                 
                         </v-btn>
@@ -34,7 +34,7 @@
                 </v-row>
                 <v-row>
                     <v-col>
-                        <v-btn to="/login" rounded="lg" prepend-icon='mdi-car' size="large" height="150" width="70%" class="mt-5 ml-7 px-16" stacked>
+                        <v-btn to="/parking" rounded="lg" prepend-icon='mdi-car' size="large" height="150" width="70%" class="mt-5 ml-7 px-16" stacked>
                             <p class="text-center">Historial Pagos <br>de <br>Estacionamiento</p>
                         </v-btn>
                         
@@ -54,9 +54,6 @@
                 <v-card-title class="my-3 text-center font-weight-bold">Creación de Datos</v-card-title>
                 <v-btn to="/alta_usuarios" rounded="lg" size="large" class="d-block mx-16 mb-5 px-4 py-3 text-none">
                     <p>Crear Usuario</p>
-                </v-btn>
-                <v-btn to="/alta_salones" rounded="lg" size="large" class="d-block mx-16 mb-5 px-4 py-3 text-none">
-                    <p>Crear Salón</p>
                 </v-btn>
                 <v-btn to="/alta_material" rounded="lg" size="large" class="d-block mx-16 mb-5 px-4 py-3 text-none">
                     <p>Crear Material</p>

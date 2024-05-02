@@ -1,4 +1,5 @@
 <template>
+  <p class="text-center text-h3 font-weight-bold my-5">Lista de Cursos</p>
   <v-container>
     <v-text-field
       v-model="search"
@@ -6,12 +7,13 @@
       single-line
       hide-details
       prepend-inner-icon="mdi-magnify"
+      class="my-8"
     ></v-text-field>
 
     <v-data-table
       :headers="headers"
       :items="filteredCourses"
-      item-key="id"
+      item-key="claveCurso"
       class="elevation-1"
     >
       <template v-slot:item.action="{ item }">
@@ -31,9 +33,6 @@
         </v-card-title>
         <v-card-text>
           <v-container>
-            <v-text-field v-model="editingCourse.fecha" label="Fecha"></v-text-field>
-            <v-text-field v-model="editingCourse.id" label="ID" ></v-text-field>
-            <v-text-field v-model="editingCourse.alumno" label="Alumno"></v-text-field>
             <v-text-field v-model="editingCourse.claveCurso" label="Clave del Curso"></v-text-field>
             <v-text-field v-model="editingCourse.nombreCurso" label="Nombre del Curso"></v-text-field>
             <v-text-field v-model="editingCourse.profesor" label="Profesor"></v-text-field>
@@ -60,12 +59,10 @@ export default {
       dialog: false,
       editingCourse: {},
       headers: [
-        { title: 'Fecha', value: 'fecha' },
-        { title: 'ID', value: 'id' },
-        { title: 'Alumno', value: 'alumno' },
         { title: 'Clave del Curso', value: 'claveCurso' },
         { title: 'Nombre del Curso', value: 'nombreCurso' },
         { title: 'Profesor', value: 'profesor' },
+        { title: 'Sección', value: 'seccion' },
         { title: 'Acciones', value: 'action', sortable: false }
       ],
       courses: []
@@ -79,11 +76,9 @@ export default {
 
       const searchLower = this.search.toLowerCase();
       return this.courses.filter(course =>
-        course.fecha.toLowerCase().includes(searchLower) ||
-        course.id.toLowerCase().includes(searchLower) ||
-        course.alumno.toLowerCase().includes(searchLower) ||
         course.claveCurso.toLowerCase().includes(searchLower) ||
         course.nombreCurso.toLowerCase().includes(searchLower) ||
+        course.seccion.toLowerCase().includes(searchLower) ||
         course.profesor.toLowerCase().includes(searchLower)
       );
     }

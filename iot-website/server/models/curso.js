@@ -1,12 +1,9 @@
 import mongoose from "mongoose"
 
 const cursoSchema = new mongoose.Schema({
-    fecha: Date,
-    id: String,
-    alumno: String,
     claveCurso: String,
     nombreCurso: String,
-    //grupo: Int8Array,
+    seccion: String,
     profesor: String,
 })
 
