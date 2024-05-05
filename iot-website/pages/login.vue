@@ -17,7 +17,7 @@
             variant="solo"
           ></v-text-field>
           <div class="d-flex justify-center">
-            <v-btn rounded="lg" color="#94F68B" size="medium" class="d-inline-block px-3 py-3 text-none">
+            <v-btn rounded="lg" @click ="Prototype" color="#94F68B" size="medium" class="d-inline-block px-3 py-3 text-none">
               <p>Iniciar Sesión</p>
             </v-btn>
             <v-btn to="/" color="#E95D5D" size="medium" rounded="lg" class="d-inline-block ml-3 px-3 py-3 text-none">
@@ -29,10 +29,23 @@
     </div>
   </div>
 </template>
-<script >
+<script>
+import Swal from 'sweetalert2'
 definePageMeta({
   layout: false
 })
+
+export default{
+  methods: {
+    Prototype(){
+      Swal.fire({
+        icon: "warning",
+        title: "Oops...",
+        text: "Por el momento esta función no se encuentra disponible.",
+    });
+    }
+  }
+}
 </script>
 <style scoped>
 .bg{

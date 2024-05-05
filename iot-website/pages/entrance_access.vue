@@ -3,25 +3,22 @@
         <v-app-bar app color="black" dark>
             <v-toolbar-title>Acceso Entradas Univesidad</v-toolbar-title>
         </v-app-bar>
-        <v-sheet class="mt-16">
-            <form @prevent.submit="submit">
-                <v-container>
-                    <v-row>
-                        <v-col>
-                            <v-text-field v-model="id" label="Buscar por ID de usuario" single-line hide-details
+        <v-container class="mt-16">
+            <v-row>
+                <v-col>
+                    <v-text-field v-model="search" label="Buscar por ID de usuario" single-line hide-details
                         prepend-inner-icon="mdi-magnify" class="my-8"></v-text-field>
-                        </v-col>
-                    </v-row>
-                </v-container>
-            </form>
-        </v-sheet>
-        <v-sheet class="search-results">
-            <v-container>
-                <h3>Resultados de Búsqueda:</h3>
-                <v-data-table :headers="headers" :items="filteredItems"></v-data-table>
-            </v-container>
-        </v-sheet>
-
+                </v-col>
+            </v-row>
+            <v-row>
+                <h3 class="ml-3">Resultados de Búsqueda:</h3>
+            </v-row>
+            <v-row>
+                <v-col cols="12">
+                    <v-data-table :headers="headers" :items="filteredItems" class="elevation-1"></v-data-table>
+                </v-col>
+            </v-row>
+        </v-container>
     </div>
 </template>
 <script>
