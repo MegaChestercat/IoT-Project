@@ -1,59 +1,37 @@
 <template>
-  <p class="text-center text-h3 font-weight-bold my-5">Alta Material</p>
-  <v-container>
-    <!-- Contenedor principal del formulario utilizando Vuetify -->
-    <v-form ref="form" v-model="valid" @submit.prevent="submitMaterial">
-      <!-- Campo de texto para el nombre del material con reglas de validación -->
-      <v-text-field
-        v-model="material.id"
-        label="ID Material"
-        :rules="idRules"
-        required
-      ></v-text-field>
-      
-      <v-text-field
-        v-model="material.nombre"
-        label="Nombre"
-        :rules="nameRules"
-        required
-      ></v-text-field>
+  <div>
+    <v-app-bar app color="black" dark>
+      <v-toolbar-title>Alta Material</v-toolbar-title>
+    </v-app-bar>
+    <v-container class="mt-16">
+      <!-- Contenedor principal del formulario utilizando Vuetify -->
+      <v-form ref="form" v-model="valid" @submit.prevent="submitMaterial">
+        <!-- Campo de texto para el nombre del material con reglas de validación -->
+        <v-text-field v-model="material.id" label="ID Material" :rules="idRules" required></v-text-field>
 
-      <!-- Campo de texto para la marca del material con reglas de validación -->
-      <v-text-field
-        v-model="material.marca"
-        label="Marca"
-        :rules="brandRules"
-        required
-      ></v-text-field>
+        <v-text-field v-model="material.nombre" label="Nombre" :rules="nameRules" required></v-text-field>
 
-      <v-text-field
-        v-model="material.cantidad"
-        label="Cantidad"
-        type="number"
-        :rules="quantityRules"
-        required
-      ></v-text-field>
+        <!-- Campo de texto para la marca del material con reglas de validación -->
+        <v-text-field v-model="material.marca" label="Marca" :rules="brandRules" required></v-text-field>
 
-      <!-- Campo de texto para el tipo de material con reglas de validación -->
-      <v-text-field
-        v-model="material.tipo"
-        label="Tipo"
-        :rules="typeRules"
-        required
-      ></v-text-field>
+        <v-text-field v-model="material.cantidad" label="Cantidad" type="number" :rules="quantityRules"
+          required></v-text-field>
 
-      <!-- Campo de texto para especificar a qué laboratorio pertenece el material con reglas de validación -->
-      <v-text-field
-        v-model="material.laboratorio"
-        label="Laboratorio al que pertenece"
-        :rules="labRules"
-        required
-      ></v-text-field>
+        <!-- Campo de texto para el tipo de material con reglas de validación -->
+        <v-text-field v-model="material.tipo" label="Tipo" :rules="typeRules" required></v-text-field>
 
-      <!-- Botón para enviar el formulario, deshabilitado si el formulario no es válido -->
-      <v-btn :disabled="!valid" color="success" type="submit">Registrar Material</v-btn>
-    </v-form>
-  </v-container>
+        <!-- Campo de texto para especificar a qué laboratorio pertenece el material con reglas de validación -->
+        <v-text-field v-model="material.laboratorio" label="Laboratorio al que pertenece" :rules="labRules"
+          required></v-text-field>
+
+        <div>
+          <!-- Botón para enviar el formulario, deshabilitado si el formulario no es válido -->
+          <v-btn :disabled="!valid" color="success" type="submit" class="mr-5">Registrar Material</v-btn>
+          <v-btn color="error" @click="cancel">Cancelar</v-btn>
+        </div>
+      </v-form>
+    </v-container>
+  </div>
 </template>
 <script>
 
@@ -118,6 +96,9 @@ export default {
           alert('Failed to register material.'); // Show error message
         }
       }
+    },
+    cancel() {
+      this.$router.push('/'); // Redirecciona al usuario a la ruta raíz
     }
   }
 }

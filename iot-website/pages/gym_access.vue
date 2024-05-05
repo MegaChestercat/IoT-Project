@@ -1,95 +1,70 @@
 <template>
-    <v-app>
-      <v-app-bar app color="black" dark>
-        <v-toolbar-title>{{ title }}</v-toolbar-title>
-      </v-app-bar>
-  
-      <v-main>
-        <div class="search-form">
-          <v-container>
-            <v-row>
-              <v-col cols="12" sm="6" md="3">
-                <v-text-field v-model="id" label="ID"></v-text-field>
-              </v-col>
-              <v-col cols="12" sm="6" md="3">
-                <v-menu v-model="menu1" :close-on-content-click="false" transition="scale-transition" offset-y>
-                  <template v-slot:activator="{ on }">
-                    <v-text-field v-model="startDate" label="Fecha de inicio" v-on="on"></v-text-field>
-                  </template>
-                  <v-date-picker v-model="startDate" no-title scrollable>
-                    <v-spacer></v-spacer>
-                    <v-btn text color="primary" @click="menu1 = false">Cancel</v-btn>
-                    <v-btn text color="primary" @click="$refs.menu1.save(startDate)">OK</v-btn>
-                  </v-date-picker>
-                </v-menu>
-              </v-col>
-              <v-col cols="12" sm="6" md="3">
-                <v-menu v-model="menu2" :close-on-content-click="false" transition="scale-transition" offset-y>
-                  <template v-slot:activator="{ on }">
-                    <v-text-field v-model="endDate" label="Fecha de fin" v-on="on"></v-text-field>
-                  </template>
-                  <v-date-picker v-model="endDate" no-title scrollable>
-                    <v-spacer></v-spacer>
-                    <v-btn text color="primary" @click="menu2 = false">Cancel</v-btn>
-                    <v-btn text color="primary" @click="$refs.menu2.save(endDate)">OK</v-btn>
-                  </v-date-picker>
-                </v-menu>
-              </v-col>
-              <v-col cols="12" md="3">
-                <v-btn color="black" dark @click="search">Buscar</v-btn>
-              </v-col>
-            </v-row>
-          </v-container>
-        </div>
-  
-        <div class="search-results">
-          <v-container>
-            <h3>Resultados de Búsqueda:</h3>
-            <v-data-table :headers="headers" :items="searchResults"></v-data-table>
-          </v-container>
-        </div>
-      </v-main>
-    </v-app>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        title: 'Gym',
-        id: '',
-        startDate: null,
-        endDate: null,
-        menu1: false,
-        menu2: false,
-        searchResults: [] // This will hold the search results
-      };
-    },
-    methods: {
-      search() {
-        // Implement your search functionality here
-        // For now, let's just simulate some search results
-        this.searchResults = [
-          { id: '123', date: '2024-04-09' },
-          { id: '456', date: '2024-04-08' },
-          // Add more search results if needed
-        ];
-      }
-    },
-    computed: {
-      headers() {
-        return [
-          { text: 'ID', value: 'id' },
-          { text: 'Fecha', value: 'date' },
-        ];
-      }
+  <div>
+    <v-app-bar app color="black" dark>
+      <v-toolbar-title>Acceso a Gimnasio</v-toolbar-title>
+    </v-app-bar>
+    <v-container class="mt-16">
+      <v-row>
+        <v-col>
+          <v-text-field v-model="search" label="Buscar por ID de usuario" single-line hide-details
+            prepend-inner-icon="mdi-magnify" class="my-8"></v-text-field>
+        </v-col>
+      </v-row>
+      <v-row>
+        <h3 class="ml-3">Resultados de Búsqueda:</h3>
+      </v-row>
+
+      <!-- Fila para la tabla de datos -->
+      <v-row>
+        <v-col cols="12">
+          <v-data-table :headers="headers" :items="filteredItems" class="elevation-1">
+          </v-data-table>
+        </v-col>
+      </v-row>
+    </v-container>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      search: '',
+      headers: [
+        { title: 'ID Usuario', value: 'id_usuario' },
+        { title: 'Tiempo', value: 'time' }
+      ],
+      items: []
     }
-  };
-  </script>
-  
-  <style>
-  .search-form {
-    margin-bottom: 20px;
+  },
+  computed: {
+    filteredItems() {
+      if (!this.search.trim()) {
+        return this.items;
+      }
+
+      const searchLower = this.search.toLowerCase();
+      return this.items.filter(item =>
+        item.id_usuario.toLowerCase().includes(searchLower)
+      );
+    }
+  },
+  created() {
+    fetch('/api/gym')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        this.items = data;
+      })
+      .catch(error => {
+        console.error('Error fetching attendances:', error);
+      });
   }
-  </style>
-  
+}
+</script>
+
+<style scoped></style>

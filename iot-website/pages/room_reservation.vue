@@ -1,110 +1,73 @@
 <template>
-    <div>
-      <v-sheet width="100%" height="10%" class="header-bg ml-5 mt-5">
-        <p class="text-h4">Reservación de Salones</p>
-      </v-sheet>
-      <v-sheet class="reservation-form">
-      <form @prevent.submit="submit">
-        <v-container>
-            <v-row>
-              <v-col cols="12" sm="6" md="3">
-                <v-text-field v-model="id" label="ID"></v-text-field>
-              </v-col>
-              <v-col cols="12" sm="6" md="3">
-                <v-text-field v-model="room" label="Salón"></v-text-field>
-              </v-col>
-              <v-col cols="12" sm="6" md="3">
-                <v-menu v-model="menu1" :close-on-content-click="false" transition="scale-transition" offset-y>
-                  <template v-slot:activator="{ on }">
-                    <v-text-field v-model="startDate" label="Fecha de inicio" v-on="on"></v-text-field>
-                  </template>
-                  <v-date-picker v-model="startDate" no-title scrollable>
-                    <v-spacer></v-spacer>
-                    <v-btn text color="primary" @click="menu1 = false">Cancel</v-btn>
-                    <v-btn text color="primary" @click="$refs.menu1.save(startDate)">OK</v-btn>
-                  </v-date-picker>
-                </v-menu>
-              </v-col>
-              <v-col cols="12" sm="6" md="3">
-                <v-menu v-model="menu2" :close-on-content-click="false" transition="scale-transition" offset-y>
-                  <template v-slot:activator="{ on }">
-                    <v-text-field v-model="endDate" label="Fecha de fin" v-on="on"></v-text-field>
-                  </template>
-                  <v-date-picker v-model="endDate" no-title scrollable>
-                    <v-spacer></v-spacer>
-                    <v-btn text color="primary" @click="menu2 = false">Cancel</v-btn>
-                    <v-btn text color="primary" @click="$refs.menu2.save(endDate)">OK</v-btn>
-                  </v-date-picker>
-                </v-menu>
-              </v-col>
-              <v-col cols="12" sm="6" md="3">
-                <v-text-field v-model="name" label="Nombre"></v-text-field>
-              </v-col>
-              <v-col cols="12" md="3">
-                <v-btn color="black" dark @click="search">Buscar</v-btn>
-              </v-col>
-            </v-row>
-          </v-container>
-      </form>
-      <v-sheet class="search-results">
-        <v-container>
-            <h3>Resultados de Búsqueda:</h3>
-            <v-data-table :headers="headers" :items="searchResults"></v-data-table>
-        </v-container>
-      </v-sheet>
-    </v-sheet>
-    </div>
-   
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        title: 'Reservación de Salones',
-        id: '',
-        room: '',
-        startDate: null,
-        endDate: null,
-        name: '',
-        menu1: false,
-        menu2: false,
-        searchResults: [] // This will hold the search results
-      };
-    },
-    methods: {
-      search() {
-        // Implement your search functionality here
-        // For now, let's just simulate some search results
-        this.searchResults = [
-          { room: 'CN129', building: 'Ingenierías', id: '43765', name: 'Álvaro Fernando Oros Ramírez', date: '2024-04-09', startTime: '08:00', endTime: '10:00' },
-          // Add more search results if needed
-        ];
-      }
-    },
-    computed: {
-      headers() {
-        return [
-          { text: 'SALÓN', value: 'room' },
-          { text: 'EDIFICIO', value: 'building' },
-          { text: 'ID', value: 'id' },
-          { text: 'NOMBRE', value: 'name' },
-          { text: 'FECHA', value: 'date' },
-          { text: 'HORA INICIO', value: 'startTime' },
-          { text: 'HORA FIN', value: 'endTime' },
-        ];
-      }
-    }
-  };
-  </script>
-  
-  <style scoped>
-  .reservation-form {
-    margin-bottom: 20px;
-  }
+  <div>
+    <v-app-bar app color="black" dark>
+      <v-toolbar-title>Reservación de Salones</v-toolbar-title>
+    </v-app-bar>
+    <v-container class="mt-16">
+      <!-- Fila para los campos de búsqueda -->
+      <v-row align="center">
+        <!-- Campo para el ID del usuario -->
+        <v-col>
+          <v-text-field v-model="search" label="Buscar por ID de usuario" single-line hide-details
+            prepend-inner-icon="mdi-magnify" class="my-8"></v-text-field>
+        </v-col>
+      </v-row>
+      <v-row>
+        <h3 class="ml-3">Resultados de Búsqueda:</h3>
+      </v-row>
+      <!-- Fila para la tabla de datos -->
+      <v-row>
+        <v-col cols="12">
+          <v-data-table :headers="headers" :items="filteredItems" :items-per-page="5"
+            class="elevation-1"></v-data-table>
+        </v-col>
+      </v-row>
+    </v-container>
+  </div>
+</template>
 
-  .header-bg{
-    color: black;
+<script>
+export default {
+  data() {
+    return {
+      search: '',
+      headers: [
+        { title: 'ID Usuario', value: 'id_usuario' },
+        { title: 'Salón', value: 'salon' },
+        { title: 'Tiempo Inicial', value: 'initial_time' },
+        { title: 'Tiempo Final', value: 'end_time' }
+      ],
+      items: []
+    }
+  },
+  computed: {
+    filteredItems() {
+      if (!this.search.trim()) {
+        return this.items;
+      }
+
+      const searchLower = this.search.toLowerCase();
+      return this.items.filter(item =>
+        item.id_usuario.toLowerCase().includes(searchLower)
+      );
+    }
+  },
+  created() {
+    fetch('/api/reservacion')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        this.items = data;
+      })
+      .catch(error => {
+        console.error('Error fetching courses:', error);
+      });
   }
-  </style>
-  
+}
+</script>
+
+<style></style>

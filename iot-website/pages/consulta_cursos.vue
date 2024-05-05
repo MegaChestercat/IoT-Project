@@ -1,54 +1,55 @@
 <template>
-  <p class="text-center text-h3 font-weight-bold my-5">Lista de Cursos</p>
-  <v-container>
-    <v-text-field
-      v-model="search"
-      label="Buscar"
-      single-line
-      hide-details
-      prepend-inner-icon="mdi-magnify"
-      class="my-8"
-    ></v-text-field>
+  <div>
+    <v-app-bar app color="black" dark>
+      <v-toolbar-title>Cursos</v-toolbar-title>
+    </v-app-bar>
+    <v-container class="mt-16">
 
-    <v-data-table
-      :headers="headers"
-      :items="filteredCourses"
-      item-key="claveCurso"
-      class="elevation-1"
-    >
-      <template v-slot:item.action="{ item }">
-        <v-btn
-          small
-          @click="editCourse(item)"
-        >
-          Editar
-        </v-btn>
-      </template>
-    </v-data-table>
+      <v-row align="center">
+        <v-col>
+          <v-text-field v-model="search" label="Buscar" single-line hide-details prepend-inner-icon="mdi-magnify"
+            class="my-8"></v-text-field>
+        </v-col>
+      </v-row>
+      <v-row>
+        <h3 class="ml-3">Resultados de Búsqueda:</h3>
+      </v-row>
+      <v-row>
+        <v-col cols="12">
+          <v-data-table :headers="headers" :items="filteredCourses" item-key="claveCurso" class="elevation-1">
+            <template v-slot:item.action="{ item }">
+              <v-btn small @click="editCourse(item)">
+                Editar
+              </v-btn>
+            </template>
+          </v-data-table>
+        </v-col>
+      </v-row>
 
-    <v-dialog v-model="dialog" max-width="600px">
-      <v-card>
-        <v-card-title>
-          Editar Curso
-        </v-card-title>
-        <v-card-text>
-          <v-container>
-            <v-text-field v-model="editingCourse.claveCurso" label="Clave del Curso"></v-text-field>
-            <v-text-field v-model="editingCourse.nombreCurso" label="Nombre del Curso"></v-text-field>
-            <v-text-field v-model="editingCourse.profesor" label="Profesor"></v-text-field>
-          </v-container>
-        </v-card-text>
-        <v-card-actions>
-          <v-btn color="primary" @click="updateCourse(editingCourse)">
-            Guardar
-          </v-btn>
-          <v-btn color="red" text @click="closeDialog">
-            Cancelar
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-  </v-container>
+      <v-dialog v-model="dialog" max-width="600px">
+        <v-card>
+          <v-card-title>
+            Editar Curso
+          </v-card-title>
+          <v-card-text>
+            <v-container>
+              <v-text-field v-model="editingCourse.claveCurso" label="Clave del Curso"></v-text-field>
+              <v-text-field v-model="editingCourse.nombreCurso" label="Nombre del Curso"></v-text-field>
+              <v-text-field v-model="editingCourse.profesor" label="Profesor"></v-text-field>
+            </v-container>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn color="primary" @click="updateCourse(editingCourse)">
+              Guardar
+            </v-btn>
+            <v-btn color="red" text @click="closeDialog">
+              Cancelar
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-container>
+  </div>
 </template>
 
 <script>
@@ -140,13 +141,13 @@ export default {
       this.editingCourse = {};
     },
     notifyUser(message, color) {
-        this.$q.notify({
-          color: color,
-          position: 'top',
-          message: message,
-          timeout: 3000
-        });
-      }
+      this.$q.notify({
+        color: color,
+        position: 'top',
+        message: message,
+        timeout: 3000
+      });
+    }
   }
 };
 </script>

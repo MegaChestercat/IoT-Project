@@ -1,8 +1,8 @@
 <template>
-    <div>
-        <div >
-            <v-sheet>
-                <v-avatar color="red" size="100"></v-avatar>
+    <div class="d-flex justify-center align-center fill-height">
+        <div>
+            <v-sheet :elevation="3" width="500" height="700" class="d-flex justify-center">
+                <v-avatar color="black" size="150" class="my-10"></v-avatar>
             </v-sheet>
         </div>
     </div>

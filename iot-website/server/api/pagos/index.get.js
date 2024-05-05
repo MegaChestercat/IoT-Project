@@ -1,23 +1,22 @@
-import AccessModel from "~~/server/models/acceso"
+import PagosModel from "~~/server/models/pagos"
 import { format } from 'date-fns';
 
 export default defineEventHandler(async (event) => {
   try {
-    const accesses = await AccessModel.find();
+    const pagos = await PagosModel.find();
     const flattenedAccesses = [];
 
-    accesses.forEach(ac => {
-      const originalDate = ac.time
+    pagos.forEach(pagosItem => {
+      const originalDate = pagosItem.time
       const desiredFormat = "yyyy-MM-dd HH:mm:ss";
       const formattedDate = format(originalDate, desiredFormat);
       // Create a new object with the model structure
-      const newAccess = {
-        id_usuario: ac.id_usuario, // Assuming "access" has an "id_usuario" property
-        acceso: ac.acceso,
+      const newPago = {
+        id_usuario: pagosItem.id_usuario, // Assuming "access" has an "id_usuario" property
         time: formattedDate, // Assuming "access" has a "time" property
       };
 
-      flattenedAccesses.push(newAccess);
+      flattenedAccesses.push(newPago);
     })
       
     return flattenedAccesses;

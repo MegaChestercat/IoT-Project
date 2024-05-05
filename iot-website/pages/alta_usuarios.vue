@@ -1,51 +1,35 @@
 <template>
-  <v-container>
-    <!-- Contenedor principal del formulario utilizando Vuetify -->
-    <v-form ref="form" v-model="valid" @submit.prevent="submitForm">
-      <!-- Campo de texto para el nombre del usuario con una longitud máxima y reglas de validación -->
-      <v-text-field
-        v-model="user.nombre"
-        :counter="10"
-        :rules="nameRules"
-        label="Nombre"
-        required
-      ></v-text-field>
+  <div>
+    <v-app-bar app color="black" dark>
+      <v-toolbar-title>Crear Usuario</v-toolbar-title>
+    </v-app-bar>
+    <v-container class="mt-16">
+      <!-- Contenedor principal del formulario utilizando Vuetify -->
+      <v-form ref="form" v-model="valid" @submit.prevent="submitForm">
+        <!-- Campo de texto para el nombre del usuario con una longitud máxima y reglas de validación -->
+        <v-text-field v-model="user.nombre" :counter="10" :rules="nameRules" label="Nombre" required></v-text-field>
 
 
 
-      <!-- Campo de texto para el ID del usuario de tipo numérico con reglas de validación -->
-      <v-text-field
-        v-model="user.id"
-        label="ID"
-        type="number"
-        :rules="idRules"
-        required
-      ></v-text-field>
+        <!-- Campo de texto para el ID del usuario de tipo numérico con reglas de validación -->
+        <v-text-field v-model="user.id" label="ID" type="number" :rules="idRules" required></v-text-field>
 
-      <!-- Selector para el rol del usuario con una lista de roles disponibles y una regla de validación -->
-      <v-select
-        v-model="user.rol"
-        :items="roles"
-        label="Rol"
-        :rules="[v => !!v || 'El campo es requerido']"
-        required
-      ></v-select>
+        <!-- Selector para el rol del usuario con una lista de roles disponibles y una regla de validación -->
+        <v-select v-model="user.rol" :items="roles" label="Rol" :rules="[v => !!v || 'El campo es requerido']"
+          required></v-select>
 
-      <!-- Campo de texto para la carrera del usuario con reglas de validación -->
-      <v-text-field
-        v-model="user.carrera"
-        label="Carrera"
-        :rules="careerRules"
-        required
-      ></v-text-field>
+        <!-- Campo de texto para la carrera del usuario con reglas de validación -->
+        <v-text-field v-model="user.carrera" label="Carrera" :rules="careerRules" required></v-text-field>
 
-      <!-- Botón para enviar el formulario, deshabilitado si el formulario no es válido -->
-      <v-btn :disabled="!valid" color="success" type="submit">Registrar</v-btn>
+        <div>
+           <!-- Botón para enviar el formulario, deshabilitado si el formulario no es válido -->
+          <v-btn :disabled="!valid" color="success" type="submit" class="mr-5">Registrar</v-btn>
+          <v-btn color="error" @click="cancel">Cancelar</v-btn>
+        </div>
 
-      <v-btn color="error" @click="cancel">Cancelar</v-btn>
-
-    </v-form>
-  </v-container>
+      </v-form>
+    </v-container>
+  </div>
 </template>
 
 <script>
@@ -78,26 +62,26 @@ export default {
   methods: {
     async submitForm() {
       if (this.$refs.form.validate()) {
-    console.log('Entró al método con datos:', this.user);
-    // console.log(":", config.MONGO_URI)
-    try {
-      const response = await fetch('/api/users', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(this.user)
-      });
-      const result = await response.json();
-      console.log('result:', result);
-      this.$refs.form.reset(); // Reinicia el formulario
-      this.$router.push('/consulta_usuarios'); // Redirige a una página de éxito
-    } catch (error) {
-      console.error('Hubo un error al registrar al usuario:', error);
+        console.log('Entró al método con datos:', this.user);
+        // console.log(":", config.MONGO_URI)
+        try {
+          const response = await fetch('/api/users', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(this.user)
+          });
+          const result = await response.json();
+          console.log('result:', result);
+          this.$refs.form.reset(); // Reinicia el formulario
+          this.$router.push('/consulta_usuarios'); // Redirige a una página de éxito
+        } catch (error) {
+          console.error('Hubo un error al registrar al usuario:', error);
+        }
+      }
     }
-  }
-}
-,
+    ,
     cancel() {
       this.$router.push('/'); // Redirecciona al usuario a la ruta raíz
     }

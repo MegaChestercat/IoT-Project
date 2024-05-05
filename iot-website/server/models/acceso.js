@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const accesoSchema = new mongoose.Schema({
-    id_usuario: mongoose.Schema.Types.ObjectId,
+    id_usuario: String,
     acceso: String,
     time: Date
     });

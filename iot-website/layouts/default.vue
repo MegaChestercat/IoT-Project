@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-layout>
-            <v-navigation-drawer color="white" width="200"  permanent>
+            <v-navigation-drawer color="green-lighten-4" width="200"  permanent>
                 <NuxtLink to="/" style="text-decoration: none;">
                     <v-img src="~~/assets/logo/logo.png" class="ml-6 mt-14" width="140" cover></v-img>
                     <p style="color: black;" class="ml-5 mb-10 mt-2 font-weight-black text-h5" >ID Scanner</p>
@@ -24,7 +24,7 @@
                     </NuxtLink>
                 </v-list>
                 
-                <v-btn to="/login" rounded="lg" width="70%"prepend-icon="mdi-login" class="mt-5 ml-7">
+                <v-btn to="/login" rounded="lg" width="70%"prepend-icon="mdi-login" class="mt-5 ml-7" color="orange-lighten-2">
                     LogIn
                 </v-btn>
             </v-navigation-drawer>

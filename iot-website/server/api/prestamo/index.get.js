@@ -1,25 +1,24 @@
-import AccessModel from "~~/server/models/acceso"
+import PrestamoModel from "~~/server/models/prestamo"
 import { format } from 'date-fns';
 
 export default defineEventHandler(async (event) => {
   try {
-    const accesses = await AccessModel.find();
+    const borrow = await PrestamoModel.find();
     const flattenedAccesses = [];
 
-    accesses.forEach(ac => {
-      const originalDate = ac.time
+    borrow.forEach(borrow => {
+      const originalDate = borrow.time
       const desiredFormat = "yyyy-MM-dd HH:mm:ss";
       const formattedDate = format(originalDate, desiredFormat);
       // Create a new object with the model structure
-      const newAccess = {
-        id_usuario: ac.id_usuario, // Assuming "access" has an "id_usuario" property
-        acceso: ac.acceso,
+      const newBorrow = {
+        id_usuario: borrow.id_usuario, // Assuming "access" has an "id_usuario" property
+        id_material: borrow.id_material,
         time: formattedDate, // Assuming "access" has a "time" property
       };
 
-      flattenedAccesses.push(newAccess);
+      flattenedAccesses.push(newBorrow);
     })
-      
     return flattenedAccesses;
   } catch (err) {
     // Consider logging the error as well
