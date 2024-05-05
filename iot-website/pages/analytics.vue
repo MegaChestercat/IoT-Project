@@ -6,7 +6,7 @@
       <GraficaAccesos />
     </div>
     <div class="graph-row">
-      <GraficaCursos />
+      <GraficaCarreras />
       <GraficaMaterial />
     </div>
   </div>
@@ -16,14 +16,14 @@
 //Importamos los componentes
 import GraficaAsistencia from '~/pages/grafica_asistencia.vue'
 import GraficaAccesos from '~/pages/grafica_accesos.vue'
-import GraficaCursos from '~/pages/grafica_cursos.vue'
+import GraficaCarreras from '~/pages/grafica_carreras.vue'
 import GraficaMaterial from '~/pages/grafica_material.vue'
 
 export default {
   components: {
     GraficaAsistencia,
     GraficaAccesos,
-    GraficaCursos,
+    GraficaCarreras,
     GraficaMaterial
   }
 }

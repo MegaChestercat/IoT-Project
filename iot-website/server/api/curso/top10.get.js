@@ -1,4 +1,4 @@
-import CourseModel from "~~/server/models/curso"
+import Curso from "~/server/models/curso"; // Importing the model as Curso
 import { subMonths, startOfToday } from 'date-fns';
 
 export default defineEventHandler(async (event) => {
@@ -7,11 +7,12 @@ export default defineEventHandler(async (event) => {
     const sixMonthsAgo = subMonths(startOfToday(), 6);
     const today = startOfToday();
 
-    // Aggregation pipeline to count users per course and sort by count in descending order
-    const topCourses = await CourseModel.aggregate([
+    // Aggregation pipeline to count occurrences per course and sort by count in descending order
+    const topCourses = await Curso.aggregate([
       {
         $match: {
-          fecha: {
+          // Assuming there's a date field that should be used for the time range filter
+          fecha: { // You may need to adjust this field name based on actual date field in your schema
             $gte: sixMonthsAgo,
             $lt: today
           }
@@ -19,15 +20,18 @@ export default defineEventHandler(async (event) => {
       },
       {
         $group: {
-          _id: "$nombreCurso", // Group by course ID
-          numberOfUsers: { $sum: 1 } // Count number of users
+          _id: {
+            claveCurso: "$claveCurso", // Group by course key
+            nombreCurso: "$nombreCurso" // Include course name in the grouping
+          },
+          numberOfUsers: { $sum: 1 } // Count number of users or registrations
         }
       },
       {
         $sort: { numberOfUsers: -1 } // Sort by numberOfUsers in descending order
       },
       {
-        $limit: 10 // Limit to top 10
+        $limit: 10 // Limit to top 10 courses
       }
     ]);
 

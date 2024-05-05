@@ -118,7 +118,7 @@
   // Define a function to fetch attendance data
   async function fetchAttendanceData(year) {
     try {
-      const response = await fetch(`/api/asistencia?year=${year}`);
+      const response = await fetch(`/api/asistencia/bymonth?year=${year}`);
       if (!response.ok) {
         throw new Error('Network response was not ok.');
       }
