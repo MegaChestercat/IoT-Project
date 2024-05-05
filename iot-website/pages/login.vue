@@ -49,6 +49,7 @@ export default{
 </script>
 <style scoped>
 .bg{
-  background: url(https://cdn.vuetifyjs.com/images/cards/docks.jpg)
+  background: url("../assets/page_bg.jpg");
+  background-size: cover;
 }
 </style>
