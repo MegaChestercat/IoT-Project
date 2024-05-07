@@ -17,7 +17,7 @@
         <v-text-field v-model="course.profesor" label="Profesor" type="text" :rules="profesorRules"
           required></v-text-field>
 
-        <v-text-field v-model="course.hora_inicio" label="Hora Inicio (YYYY/MM/DD HH:MM:SS)" type="text" :rules="horaRules"
+        <v-text-field v-model="course.hora_inicio" label="Hora Inicio (HH:MM:SS)" type="text" :rules="horaRules"
           required></v-text-field>
 
         <div>
