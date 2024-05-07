@@ -5,6 +5,7 @@ const cursoSchema = new mongoose.Schema({
     nombreCurso: String,
     seccion: String,
     profesor: String,
+    hora_inicio: Date
 })
 
 const model = mongoose.model("cursos", cursoSchema);

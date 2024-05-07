@@ -63,6 +63,7 @@ const headers = ref([
   { title: 'Nombre', value: 'nombreCurso' },
   { title: 'Profesor', value: 'profesor' },
   { title: 'Sección', value: 'seccion' },
+  { title: 'Hora Inicio', value: 'hora_inicio' },
   { title: 'Acciones', value: 'action', sortable: false },
 ]);
 

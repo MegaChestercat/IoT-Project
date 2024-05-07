@@ -17,6 +17,9 @@
         <v-text-field v-model="course.profesor" label="Profesor" type="text" :rules="profesorRules"
           required></v-text-field>
 
+        <v-text-field v-model="course.hora_inicio" label="Hora Inicio (YYYY/MM/DD HH:MM:SS)" type="text" :rules="horaRules"
+          required></v-text-field>
+
         <div>
           <v-btn :disabled="!valid" color="success" @click="submitForm" class="mr-5">Registrar</v-btn>
           <v-btn color="error" @click="cancel">Cancelar</v-btn>
@@ -36,7 +39,8 @@ export default {
         claveCurso: '',
         nombreCurso: '',
         seccion: '',
-        profesor: ''
+        profesor: '',
+        hora_inicio: ''
       },
       claveCursoRules: [
         v => !!v || 'La clave del curso es requerida'
@@ -49,11 +53,16 @@ export default {
       ],
       profesorRules: [
         v => !!v || 'El nombre del profesor es requerido'
+      ],
+      horaRules: [
+        v => !!v || 'El tiempo de inicio es requerido'
       ]
     };
   },
   methods: {
     async submitForm() {
+      let temp = "2024/06/05 " + this.course.hora_inicio
+      this.course.hora_inicio = new Date(temp)
       console.log('Submitting form');
       if (this.$refs.form.validate()) {
         try {
